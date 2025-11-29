@@ -2,6 +2,10 @@ from pydantic import BaseModel
 from datetime import datetime
 from typing import Optional, List
 
+def to_camel(string: str) -> str:
+    parts = string.split("_")
+    return parts[0] + "".join(word.capitalize() for word in parts[1:])
+
 class UserCreate(BaseModel):
     username: str
 
@@ -34,8 +38,7 @@ class ChatResponse(BaseModel):
     conversation_id: int
     response: str
 
-    class Config:
-        populate_by_name = True  
-        alias_generator = lambda field_name: "".join(
-            word.capitalize() if i > 0 else word for i, word in enumerate(field_name.split("_"))
-        )
+    model_config = {
+        "populate_by_name": True,           
+        "alias_generator": to_camel         
+    }
