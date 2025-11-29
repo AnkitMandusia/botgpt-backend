@@ -9,6 +9,10 @@ from .database import SessionLocal, Base, engine
 from .models import User, Conversation, Message, Document
 from .schemas import *
 from .utils import estimate_tokens, chunk_text, retrieve_relevant_chunks
+from .schemas import (
+    UserCreate, UserOut, ConversationCreate, MessageCreate,
+    ChatResponse, ConversationOut, MessageOut
+)
 from groq import Groq
 from dotenv import load_dotenv
 load_dotenv()
