@@ -9,15 +9,6 @@ class UserOut(BaseModel):
     id: int
     username: str
 
-class MessageCreate(BaseModel):
-    message: str
-
-class ConversationCreate(BaseModel):
-    user_id: int
-    first_message: str
-    mode: str = "open"
-    document_content: Optional[str] = None
-
 class MessageOut(BaseModel):
     role: str
     content: str
@@ -32,3 +23,9 @@ class ConversationOut(BaseModel):
 class ChatResponse(BaseModel):
     conversation_id: int
     response: str
+
+    class Config:
+        populate_by_name = True  
+        alias_generator = lambda field_name: "".join(
+            word.capitalize() if i > 0 else word for i, word in enumerate(field_name.split("_"))
+        )
