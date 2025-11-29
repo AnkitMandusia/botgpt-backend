@@ -1,6 +1,6 @@
-\# BOT GPT - Conversational AI Backend
+# BOT GPT - Conversational AI Backend
 
-\*\*Associate Engineer Case Study Solution\*\*
+**Associate Engineer Case Study Solution**
 
 
 
@@ -8,31 +8,31 @@ Live API: http://localhost:8000/docs (Swagger UI)
 
 
 
-\## Features
+## Features
 
-\- Full CRUD for multi-turn conversations
+- Full CRUD for multi-turn conversations
 
-\- Open Chat + Grounded (RAG) mode with document upload
+- Open Chat + Grounded (RAG) mode with document upload
 
-\- Real LLM via Groq (Llama 3.1 8B)
+- Real LLM via Groq (Llama 3.1 8B)
 
-\- TF-IDF retrieval from document chunks
+- TF-IDF retrieval from document chunks
 
-\- Context window management
+- Context window management
 
-\- SQLite + SQLAlchemy
+- SQLite + SQLAlchemy
 
-\- Production-ready FastAPI
+- Production-ready FastAPI
 
 
 
-\## Quick Start
+## Quick Start
 
 
 
 ```bash
 
-\# 1. Clone and enter
+# 1. Clone and enter
 
 git clone https://github.com/yourname/botgpt-backend.git
 
@@ -40,27 +40,27 @@ cd botgpt-backend
 
 
 
-\# 2. Create virtual env
+# 2. Create virtual env
 
 python -m venv venv
 
-source venv/bin/activate    # Windows: venv\\Scripts\\activate
+source venv/bin/activate    # Windows: venvScriptsactivate
 
 
 
-\# 3. Install
+# 3. Install
 
 pip install -r requirements.txt
 
 
 
-\# 4. Set your Groq API key
+# 4. Set your Groq API key
 
-export GROQ\_API\_KEY="gsk\_..."    # Windows: set GROQ\_API\_KEY=gsk\_...
+export GROQ_API_KEY="gsk_..."    # Windows: set GROQ_API_KEY=gsk_...
 
 
 
-\# 5. Run
+# 5. Run
 
 uvicorn app.main:app --reload
 
