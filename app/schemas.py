@@ -9,11 +9,21 @@ class UserOut(BaseModel):
     id: int
     username: str
 
+
+class MessageCreate(BaseModel):
+    message: str
+    
+class ConversationCreate(BaseModel):
+    user_id: int
+    first_message: str
+    mode: str = "open"
+    document_content: Optional[str] = None
+
 class MessageOut(BaseModel):
     role: str
     content: str
     created_at: datetime
-
+    
 class ConversationOut(BaseModel):
     id: int
     title: str
