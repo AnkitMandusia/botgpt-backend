@@ -22,18 +22,16 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install pytest fastapi uvicorn sqlalchemy pydantic[dotenv] groq scikit-learn python-multipart
+          pip install -r requirements.txt
 
       - name: Run tests (skip real LLM calls in CI)
         run: |
           pytest tests/ -v
         env:
-          # This tells your app to skip real Groq calls during CI
           SKIP_REAL_LLM: "true"
-          # provide dummy key to avoid import errors
-          GROQ_API_KEY: "dummy-key-for-ci-only"
+          GROQ_API_KEY: "dummy"
 
-      - name: Check code formatting (bonus hygiene)
+      - name: Check code formatting
         run: |
           pip install black
           black --check .
