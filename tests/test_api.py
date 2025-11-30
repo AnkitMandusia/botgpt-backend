@@ -1,5 +1,6 @@
 from unittest.mock import patch
-from main import client  
+from app.main import client
+
 
 @patch("main.groq_api_call")  
 def test_full_conversation_flow(mock_groq):
