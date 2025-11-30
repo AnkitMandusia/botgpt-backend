@@ -34,7 +34,7 @@ Live API: http://localhost:8000/docs (Swagger UI)
 
 # 1. Clone and enter
 
-git clone https://github.com/yourname/botgpt-backend.git
+git clone https://github.com/AnkitMandusia/botgpt-backend.git
 
 cd botgpt-backend
 
@@ -44,7 +44,7 @@ cd botgpt-backend
 
 python -m venv venv
 
-source venv/bin/activate    # Windows: venvScriptsactivate
+source venv/bin/activate    
 
 
 
@@ -56,7 +56,7 @@ pip install -r requirements.txt
 
 # 4. Set your Groq API key
 
-export GROQ_API_KEY="gsk_..."    # Windows: set GROQ_API_KEY=gsk_...
+export GROQ_API_KEY="gsk_..."    
 
 
 
