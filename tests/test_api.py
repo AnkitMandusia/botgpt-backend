@@ -1,6 +1,7 @@
 from unittest.mock import patch
+from main import client  
 
-@patch("app.main.groq_api_call")  # jo bhi function real call karta hai
+@patch("main.groq_api_call")  
 def test_full_conversation_flow(mock_groq):
     mock_groq.return_value = {"reply": "Hello BOT GPT!"}
     
