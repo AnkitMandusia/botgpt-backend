@@ -2,7 +2,7 @@ from unittest.mock import patch
 from app.main import client
 
 
-@patch("main.groq_api_call")  
+@patch("app.main.groq_api_call")  
 def test_full_conversation_flow(mock_groq):
     mock_groq.return_value = {"reply": "Hello BOT GPT!"}
     
@@ -15,5 +15,5 @@ def test_full_conversation_flow(mock_groq):
         "mode": "open"
     }).json()
 
-    conv_id = conv.get("conversation_id")  # safer
+    conv_id = conv.get("conversation_id")  
     assert conv_id is not None
