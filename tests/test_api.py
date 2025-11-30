@@ -50,14 +50,14 @@ def test_full_conversation_flow():
     assert conv_id is not None, f"Unexpected response format: {conv}"
     
     
-        # List conversations
-        convs = client.get(f"/conversations?user_id={user_id}").json()
-        assert any(c["id"] == conv_id for c in convs)
+    # List conversations
+    convs = client.get(f"/conversations?user_id={user_id}").json()
+    assert any(c["id"] == conv_id for c in convs)
     
-        # Full history
-        history = client.get(f"/conversations/{conv_id}").json()
-        assert "messages" in history
-        assert len(history["messages"]) >= 2
+    # Full history
+    history = client.get(f"/conversations/{conv_id}").json()
+    assert "messages" in history
+    assert len(history["messages"]) >= 2
 
     # Delete conversation
     del_resp = client.delete(f"/conversations/{conv_id}")
