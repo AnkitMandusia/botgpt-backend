@@ -45,7 +45,7 @@ def test_full_conversation_flow():
         "first_message": "Hello BOT GPT",
         "mode": "open"
     }).json()
-    conv_id = conv["conversation_id"]
+    conv_id = conv["conversationId"]
     assert conv_id > 0
     assert len(conv["response"]) > 10
 
