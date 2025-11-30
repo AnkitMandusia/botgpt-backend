@@ -39,26 +39,31 @@ def test_full_conversation_flow():
     user = client.post("/users", json={"username": "bob"}).json()
     user_id = user["id"]
 
-    # Start conversation
-    conv = client.post(
-        "/conversations",
-        json={"user_id": user_id, "first_message": "Hello BOT GPT", "mode": "open"}
-    ).json()
-    
-    # Support all possible return keys
-    conv_id = conv.get("conversation_id") or conv.get("id") or conv.get("conversationId")
-    assert conv_id is not None, f"Unexpected response format: {conv}"
-    
-    
-    # List conversations
-    convs = client.get(f"/conversations?user_id={user_id}").json()
-    assert any(c["id"] == conv_id for c in convs)
-    
-    # Full history
-    history = client.get(f"/conversations/{conv_id}").json()
-    assert "messages" in history
-    assert len(history["messages"]) >= 2
+    # Start conversation (open mode)
+    conv = client.post("/conversations", json={
+        "user_id": user_id,
+        "first_message": "Hello BOT GPT",
+        "mode": "open"
+    }).json()
+    conv_id = conv["conversation_id"]
+    assert conv_id > 0
+    assert len(conv["response"]) > 10
 
-    # Delete conversation
+    # Send follow-up message
+    msg = client.post(f"/conversations/{conv_id}/messages", json={"message": "Tell me something cool"})
+    assert msg.status_code == 200
+    assert "response" in msg.json()
+
+    # List conversations
+    list_resp = client.get(f"/conversations?user_id={user_id}")
+    assert list_resp.status_code == 200
+    convs = list_resp.json()
+    assert any(c["id"] == conv_id for c in convs)
+
+    # Get full history
+    history = client.get(f"/conversations/{conv_id}").json()
+    assert len(history["messages"]) >= 4
+
+    # Delete
     del_resp = client.delete(f"/conversations/{conv_id}")
     assert del_resp.status_code == 204
