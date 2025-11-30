@@ -106,7 +106,7 @@ def create_conversation(req: ConversationCreate, db: Session = Depends(get_db)):
 
     return ChatResponse(conversation_id=conv.id, response=reply)
 
-# ... (other endpoints exactly same as before, just using Depends(get_db))
+
 
 @app.get("/conversations", response_model=List[ConversationOut])
 def list_conversations(user_id: int, db: Session = Depends(get_db), skip: int=0, limit: int=20):
