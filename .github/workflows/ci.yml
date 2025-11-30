@@ -4,29 +4,36 @@ on:
   push:
     branches: [ main ]
   pull_request:
+    branches: [ main ]
 
 jobs:
   test:
     runs-on: ubuntu-latest
-
+    
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
-          python-version: "3.11"
+          python-version: '3.11'
 
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.txt
+          pip install pytest fastapi uvicorn sqlalchemy pydantic[dotenv] groq scikit-learn python-multipart
 
-      - name: Create .env file
+      - name: Run tests (skip real LLM calls in CI)
         run: |
-          echo "GROQ_API_KEY=${{ secrets.GROQ_API_KEY }}" > .env
-
-      - name: Run tests
-        run: PYTHONPATH=. pytest tests/ -v
+          pytest tests/ -v
         env:
-          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          # This tells your app to skip real Groq calls during CI
+          SKIP_REAL_LLM: "true"
+          # provide dummy key to avoid import errors
+          GROQ_API_KEY: "dummy-key-for-ci-only"
+
+      - name: Check code formatting (bonus hygiene)
+        run: |
+          pip install black
+          black --check .
