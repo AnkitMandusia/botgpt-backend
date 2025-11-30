@@ -1,4 +1,7 @@
-from app.main import client
+from fastapi.testclient import TestClient
+from app.main import app
+
+client = TestClient(app)
 
 def test_full_conversation_flow():
     # create user
